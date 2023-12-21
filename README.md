@@ -6,8 +6,8 @@
 |      Arundaya Pratama Nurhasan     | 5025221206 |
 
 ## Topologi
-Topologi yang digunakan untuk praktikum modul 5 adalah sebagai berikut.
-<gambar>
+Dibawah ini adalah opologi yang digunakan untuk praktikum modul 5 adalah sebagai berikut.
+![topologi_modul_5](https://github.com/Sirund/Jarkom-Modul-5-D24/assets/120204570/93336f4a-bb83-4984-8de1-806b9eeea3ea)
 
 ## Subneting
 
@@ -15,20 +15,11 @@ Topologi yang digunakan untuk praktikum modul 5 adalah sebagai berikut.
 Untuk melakukan subneting pada praktikum 5 ini kita menggunakan metode VLSM 
 Berikut adalah topologi pengelompokan subnet :
 
-<img src="https://github.com/FadhlyABD/Jarkom-Modul-5-D30-2023/blob/main/ss1.jpg" width = "400"/> 
+![Screenshot from 2023-12-21 14-14-00](https://github.com/Sirund/Jarkom-Modul-5-D24/assets/120204570/fd36f636-9e84-4007-ad53-86c8d4fe9634)
 
+Setelah kita membuat pengelompokan subnet selanjutnya kita buat tabel pengelompokan subnet dan melakukan perhitungan dengan VLSM kita mendapat pembagian ip sebagai berikut:
 
-Setelah kita membuat pengelompokan subnet selanjutnya kita buat tabel pengelompokan subnet : 
-
-<img src="https://github.com/FadhlyABD/Jarkom-Modul-5-D30-2023/blob/main/ss2.jpg" width = "400"/> 
-
-berikut adalah tree hasil perhitungan menggunaakan metode VLSM 
-
-<img src="https://github.com/FadhlyABD/Jarkom-Modul-5-D30-2023/blob/main/ss3.png" width = "400"/> 
-
-Setelah melakukan perhitungan dan membuat tree maka didapatkan hasil ip yaittu sebagai berikut : 
-
-<img src="https://github.com/FadhlyABD/Jarkom-Modul-5-D30-2023/blob/main/ss4.png" width = "400"/> 
+![Screenshot from 2023-12-21 14-37-14](https://github.com/Sirund/Jarkom-Modul-5-D24/assets/120204570/49f86e45-f056-49ca-89f8-f219140e2873)
 
 ## Routing 
 sebelum kita melakukan routing kia melakukan IP configuration dulu di gns3 yang telah kita buat berikut adalah configurasinya : 
@@ -37,9 +28,9 @@ Revolte :
 ```
 auto eth0
 iface eth0 inet static
-address 192.206.0.2
+address 192.203.0.2
 netmask 255.255.255.252
-gateway 192.206.0.1
+gateway 192.203.0.1
 ```
 
 Ritcher : 
@@ -47,45 +38,45 @@ Ritcher :
 ```
 auto eth0
 iface eth0 inet static
-address 192.206.0.6
+address 192.203.0.6
 netmask 255.255.255.252
-gateway 192.206.0.5
+gateway 192.203.0.5
 ```
 
 Stark :
 ```
 auto eth0
 iface eth0 inet static
-address 192.206.0.18
+address 192.203.0.18
 netmask 255.255.255.252
-gateway 192.206.0.17
+gateway 192.203.0.17
 ```
 
 Sein : 
 ```
 auto eth0
 iface eth0 inet static
-address 192.206.4.2
+address 192.203.4.2
 netmask 255.255.252.0
-gateway 192.206.4.1
+gateway 192.203.4.1
 ```
 
 TurkRegion : 
 ```
 auto eth0
 iface eth0 inet dhcp
-address 192.206.8.2
+address 192.203.8.2
 netmask 255.255.248.0
-gateway 192.206.8.1
+gateway 192.203.8.1
 ```
 
 GrobeForest : 
 ```
 auto eth0
 iface eth0 inet dhcp
-address 192.206.4.3
+address 192.203.4.3
 netmask 255.255.252.0
-gateway 192.206.4.1
+gateway 192.203.4.1
 ```
 
 SchwerMotain : 
@@ -93,18 +84,18 @@ SchwerMotain :
 ```
 auto eth0
 iface eth0 inet dhcp
-address 192.206.0.131
+address 192.203.0.131
 netmask 255.255.255.128
-gateway 192.206.0.129
+gateway 192.203.0.129
 ```
 
 LaubHills: 
 ```
 auto eth0
 iface eth0 inet dhcp
-address 192.206.2.2
+address 192.203.2.2
 netmask 255.255.254.0
-gateway 192.206.2.1
+gateway 192.203.2.1
 ```
 
 Aura : 
@@ -115,11 +106,11 @@ auto eth0
 iface eth0 inet dhcp
 auto eth1
 iface eth1 inet static
-address 192.206.0.25
+address 192.203.0.25
 netmask 255.255.255.252
 auto eth2
 iface eth2 inet static
-address 192.206.0.21
+address 192.203.0.21
 netmask 255.255.255.252
 ```
 
@@ -129,16 +120,16 @@ auto lo
 iface lo inet loopback
 auto eth0
 iface eth0 inet static
-address 192.206.0.26
+address 192.203.0.26
 netmask 255.255.255.252
-gateway 192.206.0.25
+gateway 192.203.0.25
 auto eth1
 iface eth1 inet static
-address 192.206.8.1
+address 192.203.8.1
 netmask 255.255.248.0
 auto eth2
 iface eth2 inet static
-address 192.206.4.1
+address 192.203.4.1
 netmask 255.255.252.0
 ```
 
@@ -148,16 +139,16 @@ auto lo
 iface lo inet loopback
 auto eth0
 iface eth0 inet static
-address 192.206.0.22
+address 192.203.0.22
 netmask 255.255.255.252
-gateway 192.206.0.21
+gateway 192.203.0.21
 auto eth1
 iface eth1 inet static
-address 192.206.0.17
+address 192.203.0.17
 netmask 255.255.255.252
 auto eth2
 iface eth2 inet static
-address 192.206.0.13
+address 192.203.0.13
 netmask 255.255.255.252
 ```
 
@@ -167,16 +158,16 @@ auto lo
 iface lo inet loopback
 auto eth0
 iface eth0 inet static
-address 192.206.0.14
+address 192.203.0.14
 netmask 255.255.255.252
-gateway 192.206.0.13
+gateway 192.203.0.13
 auto eth1
 iface eth1 inet static
-address 192.206.2.1
+address 192.203.2.1
 netmask 255.255.254.0
 auto eth2
 iface eth2 inet static
-address 192.206.0.129
+address 192.203.0.129
 netmask 255.255.255.128
 ```
 
@@ -186,16 +177,16 @@ auto lo
 iface lo inet loopback
 auto eth2
 iface eth2 inet static
-address 192.206.0.1
+address 192.203.0.1
 netmask 255.255.255.252
-gateway 192.206.0.129
+gateway 192.203.0.129
 auto eth1
 iface eth1 inet static
-address 192.206.0.5
+address 192.203.0.5
 netmask 255.255.255.252
 auto eth0
 iface eth0 inet static
-address 192.206.0.130
+address 192.203.0.130
 netmask 255.255.255.128
 ```
 

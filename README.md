@@ -250,9 +250,11 @@ route add -net 192.203.0.0 netmask 255.255.255.252 gw 192.203.0.22
 
 ## Nomor 1
 **Soal**
+
 Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi Aura menggunakan iptables, tetapi tidak ingin menggunakan MASQUERADE.
 
 **Penjelasan**
+
 Untuk membuat konfigurasi Aura menggunakan iptable, tetapi tidak ingin menggunakan MASQUERADE yaitu dengan masukkan perintah berikut : 
 
 ```
@@ -267,9 +269,11 @@ Selanjutnya, untuk menyambungkan ke nat, maka kita masukkan ke NAT Table dengan 
 
 ## Nomor 2
 **Soal**
+
 Kalian diminta untuk melakukan drop semua TCP dan UDP kecuali port 8080 pada TCP.
 
 **Penyelesaian**
+
 pertama tama kita install netcat pada router `Aura` dengan melakukan command sebagai berikut
 ```bash
 apt-get update
@@ -305,6 +309,7 @@ iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j
 
 ## Nomor 4
 **Soal**
+
 Lakukan pembatasan sehingga koneksi SSH pada Web Server hanya dapat dilakukan oleh masyarakat yang berada pada GrobeForest.
 
 **Penyelesaian**
@@ -314,11 +319,9 @@ iptables -A INPUT -p tcp --dport 22 -s 192.203.4.0/22 -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -j DROP
 ```
 
-**Hasil**
-
-
 ## Nomor 5
 **Soal**
+
 Selain itu, akses menuju WebServer hanya diperbolehkan saat jam kerja yaitu Senin-Jumat pada pukul 08.00-16.00.
 
 **Penyelesaian**
@@ -330,6 +333,7 @@ iptables -A INPUT -p tcp --dport 80 -m time --timestart 08:00 --timestop 16:00 -
 
 ## Nomor 6
 **Soal**
+
 Lalu, karena ternyata terdapat beberapa waktu di mana network administrator dari WebServer tidak bisa stand by, sehingga perlu ditambahkan rule bahwa akses pada hari Senin - Kamis pada jam 12.00 - 13.00 dilarang (istirahat maksi cuy) dan akses di hari Jumat pada jam 11.00 - 13.00 juga dilarang (maklum, Jumatan rek).
 
 **Penyelesaian**
@@ -344,6 +348,7 @@ iptables -A INPUT -p tcp --dport 80 -m time --timestart 11:00 --timestop 13:00 -
 
 ## Nomor 7
 **Soal**
+
 Karena terdapat 2 WebServer, kalian diminta agar setiap client yang mengakses Sein dengan Port 80 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan dan request dari client yang mengakses Stark dengan port 443 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan.
 
 **Penyelesaian**
@@ -365,6 +370,7 @@ iptables -A PREROUTING -t nat tcp -d 192.203.0.4 --dport 443 -j DNAT --to-destin
 
 ## Nomor 8
 **Soal**
+
 Karena berbeda koalisi politik, maka subnet dengan masyarakat yang berada pada Revolte dilarang keras mengakses WebServer hingga masa pencoblosan pemilu kepala suku 2024 berakhir. Masa pemilu (hingga pemungutan dan penghitungan suara selesai) kepala suku bersamaan dengan masa pemilu Presiden dan Wakil Presiden Indonesia 2024.
 
 **Penyelesaian**
@@ -380,6 +386,7 @@ iptables -A INPUT -s 192.203.0.2 -m time --datestart 2023-10-19T00:00 --datestop
 
 ## Nomor 9
 **Soal**
+
 Sadar akan adanya potensial saling serang antar kubu politik, maka WebServer harus dapat secara otomatis memblokir  alamat IP yang melakukan scanning port dalam jumlah banyak (maksimal 20 scan port) di dalam selang waktu 10 menit. (clue: test dengan nmap)
 
 **Penyelesaian**
@@ -401,9 +408,11 @@ iptables -A INPUT -p tcp --tcp-flags SYN,ACK,FIN,RST RST -j PORTSCAN
 
 ## Nomor 10
 **Soal**
+
 Karena kepala suku ingin tau paket apa saja yang di-drop, maka di setiap node server dan router ditambahkan logging paket yang di-drop dengan standard syslog level.
 
 **Penyelesaian**
+
 logging dapat ditambahkan dengan syntax iptables berikut yang dijalankan di semua node server dan router
 
 ```bash

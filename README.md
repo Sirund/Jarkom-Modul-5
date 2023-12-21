@@ -249,11 +249,11 @@ route add -net 192.203.0.0 netmask 255.255.255.252 gw 192.203.0.22
 ```
 
 ## Nomor 1
-
+**Soal**
 Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi Aura menggunakan iptables, tetapi tidak ingin menggunakan MASQUERADE.
 
 **Penjelasan**
-Untuk membuat konfigurasi Aura menggunakan iptable,tetapi tidak ingin menggunakan MASQUERADE yaitu dengan menggunakan query berikut : 
+Untuk membuat konfigurasi Aura menggunakan iptable, tetapi tidak ingin menggunakan MASQUERADE yaitu dengan masukkan perintah berikut : 
 
 ```
 ETH0_IP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
@@ -261,36 +261,38 @@ ETH0_IP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
 iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP
 ```
 
-query `ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}`  berfungsi untuk mereturn IP eth0 Aura 
+perintah `ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}`  berfungsi untuk mengembalikan IP eth0 Aura 
 
 Selanjutnya, untuk menyambungkan ke nat, maka kita masukkan ke NAT Table dengan POSTROUTING chain : `iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP`
 
 ## Nomor 2
+**Soal**
 Kalian diminta untuk melakukan drop semua TCP dan UDP kecuali port 8080 pada TCP.
 
 **Penyelesaian**
-pertama tama kita install netcat di router `Aura` terlebih dahulu dengan 
+pertama tama kita install netcat pada router `Aura` dengan melakukan command sebagai berikut
 ```bash
 apt-get update
 apt-get install netcat -y
 ```
-Lalu untuk menolak suma koneksi TCP kecuali port 8080 bisa menggunakan query berikut : 
+Lalu untuk menolak suma koneksi TCP kecuali port 8080 bisa menggunakan command berikut : 
 
 ```bash
 iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
 iptables -A INPUT -p tcp -j DROP
 ```
 
-lalu untuk menolak semua koneksi di udp bisa menggunakan query berikut : 
+lalu untuk menolak semua koneksi di udp bisa menggunakan command berikut : 
 ```bash
 iptables -A INPUT -p udp -j DROP
 ```
 
 ## Nomor 3
+**Soal**
 Kepala Suku North Area meminta kalian untuk membatasi DHCP dan DNS Server hanya dapat dilakukan ping oleh maksimal 3 device secara bersamaan, selebihnya akan di drop.
 
 **Penyelesaian**
-lakukan perintah berikut di Revolte & Richter DHCP server & DNS Server
+untuk membatasi DHCP dan DNS Server hanya dapat dilakukan oleh maksimal 3 device lakukan perintah berikut di Revolte & Richter DHCP server & DNS Server
 
 ```bash
 #Allow established and related connections
@@ -302,6 +304,7 @@ iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j
 - `--connlimit-mask 0` adalah parameter menentukan mask
 
 ## Nomor 4
+**Soal**
 Lakukan pembatasan sehingga koneksi SSH pada Web Server hanya dapat dilakukan oleh masyarakat yang berada pada GrobeForest.
 
 **Penyelesaian**
@@ -315,6 +318,7 @@ iptables -A INPUT -p tcp --dport 22 -j DROP
 
 
 ## Nomor 5
+**Soal**
 Selain itu, akses menuju WebServer hanya diperbolehkan saat jam kerja yaitu Senin-Jumat pada pukul 08.00-16.00.
 
 **Penyelesaian**
@@ -324,10 +328,8 @@ Selain itu, akses menuju WebServer hanya diperbolehkan saat jam kerja yaitu Seni
 iptables -A INPUT -p tcp --dport 80 -m time --timestart 08:00 --timestop 16:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
 ```
 
-**Hasil**
-
-
 ## Nomor 6
+**Soal**
 Lalu, karena ternyata terdapat beberapa waktu di mana network administrator dari WebServer tidak bisa stand by, sehingga perlu ditambahkan rule bahwa akses pada hari Senin - Kamis pada jam 12.00 - 13.00 dilarang (istirahat maksi cuy) dan akses di hari Jumat pada jam 11.00 - 13.00 juga dilarang (maklum, Jumatan rek).
 
 **Penyelesaian**
@@ -340,10 +342,8 @@ iptables -A INPUT -p tcp --dport 80 -m time --timestart 12:00 --timestop 13:00 -
 iptables -A INPUT -p tcp --dport 80 -m time --timestart 11:00 --timestop 13:00 --weekdays Fri -j DROP
 ```
 
-**Hasil**
-
-
 ## Nomor 7
+**Soal**
 Karena terdapat 2 WebServer, kalian diminta agar setiap client yang mengakses Sein dengan Port 80 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan dan request dari client yang mengakses Stark dengan port 443 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan.
 
 **Penyelesaian**
@@ -364,6 +364,7 @@ iptables -A PREROUTING -t nat tcp -d 192.203.0.4 --dport 443 -j DNAT --to-destin
 ```
 
 ## Nomor 8
+**Soal**
 Karena berbeda koalisi politik, maka subnet dengan masyarakat yang berada pada Revolte dilarang keras mengakses WebServer hingga masa pencoblosan pemilu kepala suku 2024 berakhir. Masa pemilu (hingga pemungutan dan penghitungan suara selesai) kepala suku bersamaan dengan masa pemilu Presiden dan Wakil Presiden Indonesia 2024.
 
 **Penyelesaian**
@@ -377,22 +378,19 @@ iptables -A INPUT -s 192.203.0.2 -m time --datestart 2023-10-19T00:00 --datestop
 
 ```
 
-<img width="632" alt="Screenshot 2023-12-16 at 01 27 30" src="https://github.com/thoriqagfi/Jarkom-Modul-5-B08-2023/assets/86884506/a9daface-4509-48d8-b2aa-5a89e1dc67b8">
-
 ## Nomor 9
+**Soal**
 Sadar akan adanya potensial saling serang antar kubu politik, maka WebServer harus dapat secara otomatis memblokir  alamat IP yang melakukan scanning port dalam jumlah banyak (maksimal 20 scan port) di dalam selang waktu 10 menit. (clue: test dengan nmap)
 
 **Penyelesaian**
   - Sein
 ```bash
-# Soal No 9
 iptables -A INPUT -p tcp --syn -m recent --name portscan --set
 iptables -A INPUT -p tcp --syn -m recent --name portscan --rcheck --seconds 600 --hitcount  20  -j  DROP
 ```
 
   - Stark
 ```bash
-# Soal No 9
 iptables -N PORTSCAN
 iptables -A PORTSCAN -m recent --set --name portscan
 iptables -A PORTSCAN -m recent --update --seconds 600 --hitcount 20 --name portscan -j LOG --log-prefix "Portscan Detected: " --log-level 4
@@ -402,6 +400,7 @@ iptables -A INPUT -p tcp --tcp-flags SYN,ACK,FIN,RST RST -j PORTSCAN
 ```
 
 ## Nomor 10
+**Soal**
 Karena kepala suku ingin tau paket apa saja yang di-drop, maka di setiap node server dan router ditambahkan logging paket yang di-drop dengan standard syslog level.
 
 **Penyelesaian**
@@ -410,5 +409,3 @@ logging dapat ditambahkan dengan syntax iptables berikut yang dijalankan di semu
 ```bash
 iptables -A INPUT -j LOG --log-level debug --log-prefix "Dropped Packet: " -m limit --limit 1/second --limit-burst 10
 ```
-
-dapat dilihat, pada server sein, telah ditambahkan rules tentang log dengan prefix "paket didrop:"

@@ -3,7 +3,7 @@
 |                Nama                |    NRP     |
 | :--------------------------------: | :--------: |
 |            Daffa Saskara           | 5025211249 |
-|      Arundaya Pratama Nurhasan     | 5025221206 |
+|      Arundaya Pratama Nurhasan     | 5025221203 |
 
 ## Topologi
 Dibawah ini adalah opologi yang digunakan untuk praktikum modul 5 adalah sebagai berikut.
@@ -25,7 +25,7 @@ Setelah kita membuat pengelompokan subnet selanjutnya kita buat tabel pengelompo
 sebelum kita melakukan routing kia melakukan IP configuration dulu di gns3 yang telah kita buat berikut adalah configurasinya : 
 
 Revolte :
-```
+```bash
 auto eth0
 iface eth0 inet static
 address 192.203.0.2
@@ -34,8 +34,7 @@ gateway 192.203.0.1
 ```
 
 Ritcher : 
-
-```
+```bash
 auto eth0
 iface eth0 inet static
 address 192.203.0.6
@@ -44,7 +43,7 @@ gateway 192.203.0.5
 ```
 
 Stark :
-```
+```bash
 auto eth0
 iface eth0 inet static
 address 192.203.0.18
@@ -53,7 +52,7 @@ gateway 192.203.0.17
 ```
 
 Sein : 
-```
+```bash
 auto eth0
 iface eth0 inet static
 address 192.203.4.2
@@ -62,7 +61,7 @@ gateway 192.203.4.1
 ```
 
 TurkRegion : 
-```
+```bash
 auto eth0
 iface eth0 inet dhcp
 address 192.203.8.2
@@ -71,7 +70,7 @@ gateway 192.203.8.1
 ```
 
 GrobeForest : 
-```
+```bash
 auto eth0
 iface eth0 inet dhcp
 address 192.203.4.3
@@ -80,8 +79,7 @@ gateway 192.203.4.1
 ```
 
 SchwerMotain : 
-
-```
+```bash
 auto eth0
 iface eth0 inet dhcp
 address 192.203.0.131
@@ -90,7 +88,7 @@ gateway 192.203.0.129
 ```
 
 LaubHills: 
-```
+```bash
 auto eth0
 iface eth0 inet dhcp
 address 192.203.2.2
@@ -99,15 +97,18 @@ gateway 192.203.2.1
 ```
 
 Aura : 
-```
+```bash
 auto lo
 iface lo inet loopback
+
 auto eth0
 iface eth0 inet dhcp
+
 auto eth1
 iface eth1 inet static
 address 192.203.0.25
 netmask 255.255.255.252
+
 auto eth2
 iface eth2 inet static
 address 192.203.0.21
@@ -115,18 +116,20 @@ netmask 255.255.255.252
 ```
 
 Heiter : 
-```
+```bash
 auto lo
 iface lo inet loopback
+
 auto eth0
 iface eth0 inet static
 address 192.203.0.26
 netmask 255.255.255.252
-gateway 192.203.0.25
+
 auto eth1
 iface eth1 inet static
 address 192.203.8.1
 netmask 255.255.248.0
+
 auto eth2
 iface eth2 inet static
 address 192.203.4.1
@@ -134,18 +137,20 @@ netmask 255.255.252.0
 ```
 
 Frieren 
-```
+```bash
 auto lo
 iface lo inet loopback
+
 auto eth0
 iface eth0 inet static
 address 192.203.0.22
 netmask 255.255.255.252
-gateway 192.203.0.21
+
 auto eth1
 iface eth1 inet static
 address 192.203.0.17
 netmask 255.255.255.252
+
 auto eth2
 iface eth2 inet static
 address 192.203.0.13
@@ -153,18 +158,20 @@ netmask 255.255.255.252
 ```
 
 Himmel : 
-```
+```bash
 auto lo
 iface lo inet loopback
+
 auto eth0
 iface eth0 inet static
 address 192.203.0.14
 netmask 255.255.255.252
-gateway 192.203.0.13
+
 auto eth1
 iface eth1 inet static
 address 192.203.2.1
 netmask 255.255.254.0
+
 auto eth2
 iface eth2 inet static
 address 192.203.0.129
@@ -172,18 +179,20 @@ netmask 255.255.255.128
 ```
 
 Fern : 
-```
+```bash
 auto lo
 iface lo inet loopback
+
 auto eth2
 iface eth2 inet static
 address 192.203.0.1
 netmask 255.255.255.252
-gateway 192.203.0.129
+
 auto eth1
 iface eth1 inet static
 address 192.203.0.5
 netmask 255.255.255.252
+
 auto eth0
 iface eth0 inet static
 address 192.203.0.130
@@ -193,52 +202,50 @@ netmask 255.255.255.128
 Setelah menentukan Ip kita lakukan touting di setiap Router yang ada, berikut adalah code untuk setiap routernya :
 
 Fern : 
-```
+```bash
 echo nameserver 192.168.122.1 > /etc/resolv.conf
-route add -net 192.206.0.0 netmask 255.255.255.252 gw 192.206.0.1
-route add -net 192.206.0.4 netmask 255.255.255.252 gw 192.206.0.5
+route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.203.0.129
 ```
 
 Himmel : 
-```
+```bash
 echo nameserver 192.168.122.1 > /etc/resolv.conf
-route add -net 192.206.2.0 netmask 255.255.254.0 gw 192.206.2.1
-route add -net 192.206.0.128 netmask 255.255.255.128 gw 192.206.0.129
-route add -net 192.206.0.0 netmask 255.255.255.252 gw 192.206.0.130
-route add -net 192.206.0.4 netmask 255.255.255.252 gw 192.206.0.130
+route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.203.0.13
+
+route add -net 192.203.0.0 netmask 255.255.255.252 gw 192.203.0.130
+route add -net 192.203.0.4 netmask 255.255.255.252 gw 192.203.0.130
 ```
 
 Frieren : 
-```
+```bash
 echo nameserver 192.168.122.1 > /etc/resolv.conf
-route add -net 192.206.0.16 netmask 255.255.255.252 gw 192.206.0.17
-route add -net 192.206.0.12netmask 255.255.255.252 gw 192.206.0.14
-route add -net 192.206.2.0 netmask 255.255.254.0 gw 192.206.0.14
-route add -net 192.206.0.128 netmask 255.255.255.128 gw 192.206.0.14
-route add -net 192.206.0.0 netmask 255.255.255.252 gw 192.206.0.14
-route add -net 192.206.0.4 netmask 255.255.255.252 gw 192.206.0.14
+route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.203.0.21
+
+route add -net 192.203.2.0 netmask 255.255.254.0 gw 192.203.0.14
+route add -net 192.203.0.128 netmask 255.255.255.128 gw 192.203.0.14
+route add -net 192.203.0.0 netmask 255.255.255.252 gw 192.203.0.14
+route add -net 192.203.0.4 netmask 255.255.255.252 gw 192.203.0.14
 ```
 
 Heiter 
-```
+```bash
 echo nameserver 192.168.122.1 > /etc/resolv.conf
-route add -net 192.206.4.0  netmask 255.255.252.0 gw 192.206.4.1
-route add -net 192.206.8.0  netmask 255.255.248.0  gw 192.206.8.1
+route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.203.0.25
 ```
 
 Aura 
-```
+```bash
 # Heiter
-route add -net 192.206.4.0  netmask 255.255.252.0 gw 192.206.0.26
-route add -net 192.206.8.0  netmask 255.255.248.0  gw 192.206.0.26
-route add -net 192.206.0.24  netmask 255.255.255.252 gw 192.206.0.26
+route add -net 192.203.4.0  netmask 255.255.252.0 gw 192.203.0.26
+route add -net 192.203.8.0  netmask 255.255.248.0  gw 192.203.0.26
+
 # Frieren
-route add -net 192.206.0.20 netmask 255.255.255.252 gw 192.206.0.22
-route add -net 192.206.0.16 netmask 255.255.255.252 gw 192.206.0.22
-route add -net 192.206.0.12netmask 255.255.255.252 gw 192.206.0.22
-route add -net 192.206.2.0 netmask 255.255.254.0 gw 192.206.0.22
-route add -net 192.206.0.128 netmask 255.255.255.128 gw 192.206.0.22
-route add -net 192.206.0.0 netmask 255.255.255.252 gw 192.206.0.22
+route add -net 192.203.0.16 netmask 255.255.255.252 gw 192.203.0.22
+route add -net 192.203.0.12 netmask 255.255.255.252 gw 192.203.0.22
+route add -net 192.203.2.0 netmask 255.255.254.0 gw 192.203.0.22
+route add -net 192.203.0.128 netmask 255.255.255.128 gw 192.203.0.22
+route add -net 192.203.0.7 netmask 255.255.255.252 gw 192.203.0.22
+route add -net 192.203.0.0 netmask 255.255.255.252 gw 192.203.0.22
 ```
 
 ## Nomor 1
@@ -263,19 +270,19 @@ Kalian diminta untuk melakukan drop semua TCP dan UDP kecuali port 8080 pada TCP
 
 **Penyelesaian**
 pertama tama kita install netcat di router `Aura` terlebih dahulu dengan 
-```
+```bash
 apt-get update
 apt-get install netcat -y
 ```
 Lalu untuk menolak suma koneksi TCP kecuali port 8080 bisa menggunakan query berikut : 
 
-```
+```bash
 iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
 iptables -A INPUT -p tcp -j DROP
 ```
 
 lalu untuk menolak semua koneksi di udp bisa menggunakan query berikut : 
-```
+```bash
 iptables -A INPUT -p udp -j DROP
 ```
 
@@ -285,7 +292,7 @@ Kepala Suku North Area meminta kalian untuk membatasi DHCP dan DNS Server hanya 
 **Penyelesaian**
 lakukan perintah berikut di Revolte & Richter DHCP server & DNS Server
 
-```
+```bash
 #Allow established and related connections
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 #Limit ICMP connections to 3 per second
@@ -300,7 +307,7 @@ Lakukan pembatasan sehingga koneksi SSH pada Web Server hanya dapat dilakukan ol
 **Penyelesaian**
   - Sein & Stark (Web Server)
 ```bash
-iptables -A INPUT -p tcp --dport 22 -s 192.206.4.0/22 -j ACCEPT
+iptables -A INPUT -p tcp --dport 22 -s 192.203.4.0/22 -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -j DROP
 ```
 
@@ -343,17 +350,17 @@ Karena terdapat 2 WebServer, kalian diminta agar setiap client yang mengakses Se
   - Sein
 ```bash
 # Soal 7
-iptables -A PREROUTING -t nat -p tcp -d 192.206.4.2 --dport 80 -m statistics --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.206.4.2:80
+iptables -A PREROUTING -t nat -p tcp -d 192.203.4.2 --dport 80 -m statistics --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.203.4.2:80
 
-iptables -A PREROUTING -t nat -p tcp -d 192.206.4.2 --dport 80 -j DNAT --to-destination 192.206.0.14:80
+iptables -A PREROUTING -t nat -p tcp -d 192.203.4.2 --dport 80 -j DNAT --to-destination 192.203.0.14:80
 ```
 
   - Stark
 ```bash
 # Soal 7
-iptables -A PREROUTING -t nat -p tcp -d 192.206.0.4 --dport 443 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.206.4.2:443
+iptables -A PREROUTING -t nat -p tcp -d 192.203.0.4 --dport 443 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.203.4.2:443
 
-iptables -A PREROUTING -t nat tcp -d 192.206.0.4 --dport 443 -j DNAT --to-destination 192.206.0.14:443
+iptables -A PREROUTING -t nat tcp -d 192.203.0.4 --dport 443 -j DNAT --to-destination 192.203.0.14:443
 ```
 
 ## Nomor 8
@@ -363,10 +370,10 @@ Karena berbeda koalisi politik, maka subnet dengan masyarakat yang berada pada R
   - Sein
 ```bash
 ### apabila ingin meng-drop TCP 
-iptables -A INPUT -p tcp -s 192.206.0.2 --dport 80 -m time --datestart 2023-10-19T00:00 --datestop 2024-02-15T00:00 -j DROP
+iptables -A INPUT -p tcp -s 192.203.0.2 --dport 80 -m time --datestart 2023-10-19T00:00 --datestop 2024-02-15T00:00 -j DROP
 
 ### namun ingin drop semua, bisa digunakan :
-iptables -A INPUT -s 192.206.0.2 -m time --datestart 2023-10-19T00:00 --datestop 2024-02-15T00:00 -j DROP
+iptables -A INPUT -s 192.203.0.2 -m time --datestart 2023-10-19T00:00 --datestop 2024-02-15T00:00 -j DROP
 
 ```
 
@@ -403,6 +410,5 @@ logging dapat ditambahkan dengan syntax iptables berikut yang dijalankan di semu
 ```bash
 iptables -A INPUT -j LOG --log-level debug --log-prefix "Dropped Packet: " -m limit --limit 1/second --limit-burst 10
 ```
-<img width="1274" alt="Screenshot 2023-12-16 at 01 41 57" src="https://github.com/thoriqagfi/Jarkom-Modul-5-B08-2023/assets/86884506/e553caa1-af9b-4e86-b26f-70cae46fa30e">
 
 dapat dilihat, pada server sein, telah ditambahkan rules tentang log dengan prefix "paket didrop:"
